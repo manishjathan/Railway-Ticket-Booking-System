@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.capiot.dao.WalletDAOImpl;
+
 @Entity
 @Table(name="customer")
 public class Customer {
@@ -113,7 +115,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address="
-				+ address + ", mobNo=" + mobNo + ", panCardNo=" + panCardNo + ", uidNo=" + uidNo + "";
+				+ address + ", mobNo=" + mobNo + ", panCardNo=" + panCardNo + ", uidNo=" + uidNo + "]";
 	}
 
 	//Parameterized Constructor

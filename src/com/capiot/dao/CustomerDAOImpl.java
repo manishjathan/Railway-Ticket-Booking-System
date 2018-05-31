@@ -1,11 +1,14 @@
 package com.capiot.dao;
 
 import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.capiot.entity.Customer;
+import com.capiot.entity.Wallet;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -21,8 +24,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		try {
 		System.out.println("Get the current Session");
-		System.out.println("Save the Object");
-		currentSession.saveOrUpdate(theCustomer);	
+		
+		//Create Object
+		System.out.println("Creating Objects...");
+		Wallet wallet = new Wallet(1000);
+		
+		//Associate Objects
+		System.out.println("Associating Objects...");
+		theCustomer.setWallet(wallet);
+		
+		//Save the Objects
+		System.out.println("Saving the Objects...");
+		currentSession.saveOrUpdate(theCustomer);
+		System.out.println("Objects Saved.");
 		}catch(Exception e) {
 		  e.printStackTrace();
 		  currentSession.close();

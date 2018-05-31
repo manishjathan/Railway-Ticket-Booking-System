@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.capiot.dao.CustomerDAO;
 import com.capiot.dao.WalletDAO;
 import com.capiot.entity.Customer;
+import com.capiot.entity.Wallet;
 
 @Controller
 @RequestMapping("/customer")
@@ -58,14 +59,25 @@ public class CustomerController {
 	}
 	
 
-	@GetMapping("/updateWallet")
-	public String updateWallet(@RequestParam("customerId") int theId,Model theModel){
+	@GetMapping("/getWallet")
+	public String getWallet(@RequestParam("customerId") int theId,Model theModel){
+		System.out.println("\n\n\n---------------------Get Wallet-------------------\n");
 		System.out.println("Customer Id : " + theId);
 		Customer customer = customerDao.getCustomer(theId);
 		customer.toString();
-		System.out.println("Update Wallet!");
-		return "update-wallet-info";
-	}	
+		Wallet wallet = new Wallet();
+		theModel.addAttribute("wallet", wallet);
+		System.out.println("\n\n\n---------------------Model Attribute added-------------------\n");
+		return "get-wallet-info";
+	
+	}
+	
+	@PostMapping("/updateWallet")
+	public void updateWallet(@ModelAttribute("wallet") Wallet theWallet){
+		
+		System.out.println("Wallet : " + theWallet.toString());
+		
+	}
 	
 	
 	

@@ -14,7 +14,7 @@
 	<br> MobNo : ${customer.mobNo}
 	<br>
 
-	<c:url var="updateLink" value="/customer/updateWallet">
+	<c:url var="updateLink" value="/customer/getWallet">
 		<c:param name="customerId" value="${customer.id}" />
 	</c:url>
 	<a href="${updateLink}">Update Wallet</a>
