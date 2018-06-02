@@ -27,7 +27,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		//Create Object
 		System.out.println("Creating Objects...");
-		Wallet wallet = new Wallet(1000);
+		Wallet wallet = new Wallet(100);
 		
 		//Associate Objects
 		System.out.println("Associating Objects...");
@@ -54,4 +54,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return customer;
 	
 	}
+
+	@Override
+	@Transactional
+	public void updateCustomer(Customer theCustomer) {
+	
+		Session currentSession = sessionFactory.getCurrentSession();
+		try {
+		System.out.println("Get the current Session");
+		
+		//Save the Objects
+		System.out.println("Saving the Objects...");
+		currentSession.saveOrUpdate(theCustomer);
+		System.out.println("Objects Saved.");
+		}catch(Exception e) {
+		  e.printStackTrace();
+		  currentSession.close();
+		}
+	}
+
+
 }

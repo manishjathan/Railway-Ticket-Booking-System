@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capiot.dao.CustomerDAO;
-import com.capiot.dao.WalletDAO;
 import com.capiot.entity.Customer;
 import com.capiot.entity.Wallet;
 
@@ -23,7 +22,6 @@ public class CustomerController {
 	//Injecting CustomerDAO dependency
 	@Autowired
 	private CustomerDAO customerDao;
-	private WalletDAO walletDao;
 	
 	@GetMapping("/register")
 	public String registerCustomer(Model theModel) {
@@ -45,10 +43,23 @@ public class CustomerController {
 		return "customer-info";
 	}	
 	
+	@GetMapping("/getWallet")
+	public String getWallet(@RequestParam("customerId") int theId,Model theModel){
+		
+		System.out.println("\n\n\n---------------------Get Wallet-------------------\n");
+		System.out.println("Customer Id : " + theId);		
+		Customer customer = customerDao.getCustomer(theId);
+		Wallet wallet = new Wallet();
+		wallet = customer.getWallet();
+		System.out.println("Wallet Info :" + wallet.toString());
+		theModel.addAttribute("customer",customer);
+		System.out.println("\n\n\n---------------------Model Attribute added-------------------\n");
+		return "get-wallet-info";
+	
+	}
 	
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
-		
 		
 		System.out.println("Customer Info : " + theCustomer.toString());
 		System.out.println("Saving Customer....");
@@ -58,26 +69,17 @@ public class CustomerController {
 		return "customer-info";
 	}
 	
+	@PostMapping("/updateCustomer")
+	public String updateCustomerWallet(@ModelAttribute("customer") Customer theCustomer) {
+		
+		System.out.println("Customer Info : " + theCustomer.toString());
+		System.out.println("Saving Customer....");
+		customerDao.updateCustomer(theCustomer);
+		
+		System.out.println("Customer Object saved\n");
+		return "customer-info";
+	}
 
-	@GetMapping("/getWallet")
-	public String getWallet(@RequestParam("customerId") int theId,Model theModel){
-		System.out.println("\n\n\n---------------------Get Wallet-------------------\n");
-		System.out.println("Customer Id : " + theId);
-		Customer customer = customerDao.getCustomer(theId);
-		customer.toString();
-		Wallet wallet = new Wallet();
-		theModel.addAttribute("wallet", wallet);
-		System.out.println("\n\n\n---------------------Model Attribute added-------------------\n");
-		return "get-wallet-info";
-	
-	}
-	
-	@PostMapping("/updateWallet")
-	public void updateWallet(@ModelAttribute("wallet") Wallet theWallet){
-		
-		System.out.println("Wallet : " + theWallet.toString());
-		
-	}
 	
 	
 	

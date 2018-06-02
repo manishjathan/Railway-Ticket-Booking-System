@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<form:form action="updateWallet" modelAttribute="wallet" method="POST">
+	<form:form action="updateCustomer" modelAttribute="customer" method="POST">
 			
 			<!-- need to associate this data with customer id -->	
 			
@@ -17,10 +17,47 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><label>Wallet Amount:</label></td>
-						<td><form:input path="amount" /></td>
+						<td><label>Id:</label></td>
+						<td><form:input path="id" /></td>
+					</tr>
+					<tr>
+						<td><label>First name:</label></td>
+						<td><form:input path="firstName" /></td>
+					</tr>
+				
+					<tr>
+						<td><label>Last name:</label></td>
+						<td><form:input path="lastName" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Email:</label></td>
+						<td><form:input path="email" /></td>
 					</tr>
 					
+					<tr>
+						<td><label>Address:</label></td>
+						<td><form:input path="address" /></td>
+					</tr>
+				
+					<tr>
+						<td><label>Mob No:</label></td>
+						<td><form:input path="mobNo" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Pan Card No:</label></td>
+						<td><form:input path="panCardNo" /></td>
+					</tr>
+					
+					<tr>
+						<td><label>UID No:</label></td>
+						<td><form:input path="uidNo" /></td>
+					</tr>
+					<tr>
+						<td><label>Wallet Amount:</label></td>
+						<td><form:input path="wallet.amount" /></td>
+					</tr>
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save" /></td>
