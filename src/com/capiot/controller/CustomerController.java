@@ -1,5 +1,7 @@
 package com.capiot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,14 +36,26 @@ public class CustomerController {
 		return "customer-registration-form";
 	}
 	
-	@GetMapping("/showCustomer/{customerId}")
-	public String showCustomerLoginForm(@PathVariable("customerId") int id, Model theModel){
+	@GetMapping("/getCustomer/{customerId}")
+	public String getCustomer(@PathVariable("customerId") int id, Model theModel){
 		System.out.println("\nCustomer Id : " + id);
 		Customer customer = customerDao.getCustomer(id);
 		System.out.println("Customer in Controller : " + customer);
 		theModel.addAttribute("customer", customer);
 		return "customer-info";
 	}	
+	
+	@GetMapping("/list")
+	public void listCustomers(Model theModel) {
+		
+		List<Customer> theCustomers = customerDao.getCustomers();
+		for(Customer customer : theCustomers) {
+			System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail()) ;
+		}
+		theModel.addAttribute("customers",theCustomers);
+		//return "list-customer";
+	}
+	
 	
 	@GetMapping("/getWallet")
 	public String getWallet(@RequestParam("customerId") int theId,Model theModel){

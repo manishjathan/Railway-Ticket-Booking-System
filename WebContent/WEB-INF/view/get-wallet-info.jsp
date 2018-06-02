@@ -55,6 +55,10 @@
 						<td><form:input path="uidNo" /></td>
 					</tr>
 					<tr>
+						<td><label>Wallet Id:</label></td>
+						<td><form:input path="wallet.id" /></td>
+					</tr>
+					<tr>
 						<td><label>Wallet Amount:</label></td>
 						<td><form:input path="wallet.amount" /></td>
 					</tr>

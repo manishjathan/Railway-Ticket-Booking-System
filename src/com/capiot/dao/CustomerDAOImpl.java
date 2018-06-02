@@ -1,9 +1,12 @@
 package com.capiot.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -65,12 +68,25 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		//Save the Objects
 		System.out.println("Saving the Objects...");
-		currentSession.saveOrUpdate(theCustomer);
+		currentSession.update(theCustomer);
+		Wallet theWallet = theCustomer.getWallet();
+		currentSession.update(theWallet);
 		System.out.println("Objects Saved.");
 		}catch(Exception e) {
 		  e.printStackTrace();
 		  currentSession.close();
 		}
+	}
+
+	@Override
+	@Transactional
+	public List<Customer> getCustomers() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Customer> theQuery = currentSession.createQuery("from Customer order by lastName",Customer.class);
+		List<Customer> customers = theQuery.getResultList();
+		System.out.println(customers);
+		return customers;
 	}
 
 
