@@ -46,14 +46,14 @@ public class CustomerController {
 	}	
 	
 	@GetMapping("/list")
-	public void listCustomers(Model theModel) {
+	public String listCustomers(Model theModel) {
 		
 		List<Customer> theCustomers = customerDao.getCustomers();
 		for(Customer customer : theCustomers) {
-			System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail()) ;
+			System.out.println(customer);
 		}
 		theModel.addAttribute("customers",theCustomers);
-		//return "list-customer";
+		return "list-customer";
 	}
 	
 	
