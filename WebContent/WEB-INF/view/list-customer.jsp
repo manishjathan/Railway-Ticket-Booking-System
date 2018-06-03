@@ -21,6 +21,7 @@
 			<!--  add our html table here -->		
 			<table>
 				<tr>
+					<th>Customer ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
@@ -34,6 +35,7 @@
 				<c:forEach var="tempCustomer" items="${customers}">
 					
 					<tr>
+						<td> ${tempCustomer.id} </td>
 						<td> ${tempCustomer.firstName} </td>
 						<td> ${tempCustomer.lastName} </td>
 						<td> ${tempCustomer.email} </td>
