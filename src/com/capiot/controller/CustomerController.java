@@ -1,5 +1,7 @@
 package com.capiot.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capiot.dao.CustomerDAO;
 import com.capiot.entity.Customer;
+import com.capiot.entity.Ticket;
 import com.capiot.entity.Wallet;
+import com.capiot.qrcodegenerator.QrCodeGenerator;
 
 @Controller
 @RequestMapping("/customer")
@@ -94,6 +98,13 @@ public class CustomerController {
 		return "customer-info";
 	}
 
+	@GetMapping("/generateTicket")
+	public void generateTicket() throws IOException{
+		QrCodeGenerator qrCodeGenerator = new QrCodeGenerator();
+		qrCodeGenerator.saveImage("http://api.qrserver.com/v1/create-qr-code/?data=HelloWorld!&size=200x200","qrCode.jpg");
+	}
+	
+	
 }
 
 

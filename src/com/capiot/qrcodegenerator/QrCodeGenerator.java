@@ -10,8 +10,9 @@ public class QrCodeGenerator {
 	public static void saveImage(String imageUrl, String destinationFile) throws IOException {
 		URL url = new URL(imageUrl);
 		InputStream is = url.openStream();
-		OutputStream os = new FileOutputStream(destinationFile);
-
+		String finalDestinationFile = "C:\\Users\\capiot\\eclipse-workspace2\\railway-ticket-mgmt-system\\WebContent\\resources\\"+destinationFile;
+		OutputStream os = new FileOutputStream(finalDestinationFile);
+		
 		byte[] b = new byte[2048];
 		int length;
 		System.out.println("Saving Image....");

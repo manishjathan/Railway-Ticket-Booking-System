@@ -1,16 +1,19 @@
 package com.capiot.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.capiot.dao.WalletDAOImpl;
 
 @Entity
 @Table(name="customer")
@@ -47,6 +50,13 @@ public class Customer {
 	@JoinColumn(name="wallet_id")
 	private Wallet wallet;
 
+	
+	@OneToMany(fetch=FetchType.EAGER,
+			   mappedBy="customer",
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Ticket> tickets;
+	
 	public int getId() {
 		return id;
 	}
@@ -114,8 +124,9 @@ public class Customer {
 	
 	@Override
 	public String toString() {
-		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address="
-				+ address + ", mobNo=" + mobNo + ", panCardNo=" + panCardNo + ", uidNo=" + uidNo + "]";
+		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", address=" + address + ", mobNo=" + mobNo + ", panCardNo=" + panCardNo + ", uidNo=" + uidNo
+				+ ", wallet=" + wallet + ", tickets=" + tickets + "]";
 	}
 
 	//Parameterized Constructor
@@ -143,4 +154,19 @@ public class Customer {
 		
 	}
 
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	public void addTicket(Ticket ticket) {
+		if(this.getTickets() == null) {
+			List<Ticket> tickets = new ArrayList<Ticket>();
+			this.setTickets(tickets);
+		}
+		this.getTickets().add(ticket);
+	}
 }

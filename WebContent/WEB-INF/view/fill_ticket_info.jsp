@@ -9,51 +9,40 @@
 </head>
 <body>
 	
-	<form:form action="updateCustomer" modelAttribute="customer" method="POST">
+	<form:form action="bookTicket" modelAttribute="customer" method="POST">
 			
 			<!-- need to associate this data with customer id -->	
-			
 			
 			<table>
 				<tbody>
 					<tr>
-						<td><form:hidden path="id" /></td>
+						<td><label>Customer_id:</label></td>
+						<td><form:input path="customer.id" /></td>
 					</tr>
 					<tr>
-						<td><form:hidden path="firstName" /></td>
+						<td><label>Id:</label></td>
+						<td><form:input path="id" /></td>
+					</tr>
+					<tr>
+						<td><label>Journey Type:</label></td>
+						<td><form:input path="journeyType" /></td>
 					</tr>
 				
 					<tr>
-						<td><form:hidden path="lastName" /></td>
+						<td><label>Source:</label></td>
+						<td><form:input path="source" /></td>
 					</tr>
 
 					<tr>
-						<td><form:hidden path="email" /></td>
+						<td><label>Destination:</label></td>
+						<td><form:input path="destination" /></td>
 					</tr>
 					
 					<tr>
-						<td><form:hidden path="address" /></td>
+						<td><label>Total Fare:</label></td>
+						<td><form:input path="totalFare" /></td>
 					</tr>
 				
-					<tr>
-						<td><form:hidden path="mobNo" /></td>
-					</tr>
-
-					<tr>
-						<td><form:hidden path="panCardNo" /></td>
-					</tr>
-					
-					<tr>
-						<td><form:hidden path="uidNo" /></td>
-					</tr>
-					<tr>
-						<td><label>Wallet Id:</label></td>
-						<td><form:input path="wallet.id" /></td>
-					</tr>
-					<tr>
-						<td><label>Wallet Amount:</label></td>
-						<td><form:input path="wallet.amount" /></td>
-					</tr>
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save" /></td>

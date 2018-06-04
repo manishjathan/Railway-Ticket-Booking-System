@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.capiot.entity.Customer;
+import com.capiot.entity.Ticket;
 import com.capiot.entity.Wallet;
 
 @Repository
@@ -68,9 +69,11 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		//Save the Objects
 		System.out.println("Saving the Objects...");
+
 		currentSession.update(theCustomer);
 		Wallet theWallet = theCustomer.getWallet();
 		currentSession.update(theWallet);
+		
 		System.out.println("Objects Saved.");
 		}catch(Exception e) {
 		  e.printStackTrace();
@@ -88,5 +91,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return customers;
 	}
 
-
+	
+	
 }
