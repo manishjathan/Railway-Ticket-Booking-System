@@ -51,10 +51,8 @@ public class Customer {
 	private Wallet wallet;
 
 	
-	@OneToMany(fetch=FetchType.EAGER,
-			   mappedBy="customer",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name="customer_id")
 	private List<Ticket> tickets;
 	
 	public int getId() {

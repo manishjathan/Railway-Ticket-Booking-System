@@ -36,11 +36,16 @@ public class Ticket {
 	@Column(name="expiry_Date")
 	private Date expiryDate;
 	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="customer_id")
-	private Customer customer;
-	
+	@Column(name="customer_id")
+	private int customerId;
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 
 	public int getId() {
 		return id;
@@ -82,14 +87,12 @@ public class Ticket {
 		this.totalFare = totalFare;
 	}
 
-	public Ticket(String journeyType, String source, String destination, int totalFare, Date expiryDate,
-			Customer customer) {
+	public Ticket(String journeyType, String source, String destination, int totalFare, Date expiryDate) {
 		this.journeyType = journeyType;
 		this.source = source;
 		this.destination = destination;
 		this.totalFare = totalFare;
 		this.expiryDate = expiryDate;
-		this.customer = customer;
 	}
 
 	public Date getExpiryDate() {
@@ -100,19 +103,11 @@ public class Ticket {
 		this.expiryDate = expiryDate;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 	
 	@Override
 	public String toString() {
 		return "Ticket [id=" + id + ", journeyType=" + journeyType + ", source=" + source + ", destination="
-				+ destination + ", totalFare=" + totalFare + ", expiryDate=" + expiryDate + ", customer=" + customer
-				+ "]";
+				+ destination + ", totalFare=" + totalFare + ", expiryDate=" + expiryDate + "]";
 	}
 	
 	public Ticket() {

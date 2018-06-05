@@ -11,6 +11,7 @@ public interface CustomerDAO {
 	public Customer getCustomer(int theId);
 	public void updateCustomer(Customer theCustomer);
 	public List<Customer> getCustomers();
+	public void addTicket(Customer customer, Ticket ticket);
 	
 
 }

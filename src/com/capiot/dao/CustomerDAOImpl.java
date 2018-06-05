@@ -1,5 +1,6 @@
 package com.capiot.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -91,6 +92,30 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return customers;
 	}
 
+	@Override
+	@Transactional
+	public void addTicket(Customer customer, Ticket ticket) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		try {
+		System.out.println("Get the current Session");
+		//Save the Objects
+		System.out.println("Saving the Objects...");
+
+		if(customer.getTickets() == null) {
+			List<Ticket> tickets = new ArrayList<Ticket>();
+			customer.setTickets(tickets);
+		}
+		customer.getTickets().add(ticket);
+		currentSession.update(customer);
+		
+		System.out.println("Objects Saved.");
+		}catch(Exception e) {
+		  e.printStackTrace();
+		  currentSession.close();
+		}
+		
+	}
 	
 	
 }

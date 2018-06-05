@@ -9,16 +9,12 @@
 </head>
 <body>
 	
-	<form:form action="bookTicket" modelAttribute="customer" method="POST">
+	<form:form action="bookTicket" modelAttribute="ticket" method="POST">
 			
 			<!-- need to associate this data with customer id -->	
 			
 			<table>
 				<tbody>
-					<tr>
-						<td><label>Customer_id:</label></td>
-						<td><form:input path="customer.id" /></td>
-					</tr>
 					<tr>
 						<td><label>Id:</label></td>
 						<td><form:input path="id" /></td>
@@ -43,6 +39,10 @@
 						<td><form:input path="totalFare" /></td>
 					</tr>
 				
+					<tr>
+						<td><label>Customer Id:</label></td>
+						<td><form:input path="customerId" /></td>
+					</tr>
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save" /></td>

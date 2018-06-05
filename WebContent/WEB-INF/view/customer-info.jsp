@@ -13,8 +13,9 @@
 	<br> Address : ${customer.address}
 	<br> MobNo : ${customer.mobNo}
 	<br> Wallet MMoney : ${customer.wallet.amount}
+	<br> Tickets : ${customer.tickets}
 	<br>
-
+	
 	<c:url var="updateLink" value="/customer/getWallet">
 		<c:param name="customerId" value="${customer.id}" />
 	</c:url>

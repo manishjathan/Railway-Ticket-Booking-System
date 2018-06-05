@@ -104,7 +104,23 @@ public class CustomerController {
 		qrCodeGenerator.saveImage("http://api.qrserver.com/v1/create-qr-code/?data=HelloWorld!&size=200x200","qrCode.jpg");
 	}
 	
+	@GetMapping("/fillTicket")
+	public String fillTicket(Model theModel){
+		
+		Ticket ticket = new Ticket();
+		theModel.addAttribute("ticket",ticket);
+		return "fill_ticket_info";
+	}
 	
+	@PostMapping("/bookTicket")
+	public String bookTicket(@ModelAttribute("ticket") Ticket theTicket,Model model){
+		
+		int id = theTicket.getCustomerId();
+		Customer customer = customerDao.getCustomer(id);
+		customerDao.addTicket(customer,theTicket);
+		model.addAttribute("customer",customer);
+		return "customer-info";
+	}
 }
 
 
