@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.capiot.commonUtils.CommonUtilities;
 import com.capiot.dao.CustomerDAO;
 import com.capiot.entity.Customer;
 import com.capiot.entity.Ticket;
 import com.capiot.entity.Wallet;
-import com.capiot.qrcodegenerator.QrCodeGenerator;
 
 @Controller
 @RequestMapping("/customer")
@@ -100,7 +100,7 @@ public class CustomerController {
 
 	@GetMapping("/generateTicket")
 	public void generateTicket() throws IOException{
-		QrCodeGenerator qrCodeGenerator = new QrCodeGenerator();
+		CommonUtilities qrCodeGenerator = new CommonUtilities();
 		
 		qrCodeGenerator.saveImage("http://api.qrserver.com/v1/create-qr-code/?data=HelloWorld!&size=200x200","qrCode.jpg");
 	}
@@ -117,19 +117,25 @@ public class CustomerController {
 	public String bookTicket(@ModelAttribute("ticket") Ticket theTicket,Model model) throws IOException{
 		
 		int id = theTicket.getCustomerId();
+		//Fetching the total Fare and deducting wallet money
+		theTicket = CommonUtilities.setTotalFare(theTicket);
+		int totalFare = theTicket.getTotalFare();
 		Customer customer = customerDao.getCustomer(id);
+		customer = CommonUtilities.deductWalletMoney(customer,totalFare);
 		customerDao.addTicket(customer,theTicket);
-		model.addAttribute("customer",customer);
 		
-		
+		//Generating qrCode
 		String url_param_data = String.valueOf(theTicket.getId());
 		String url_param_size = "200x200";
 		String url = "http://api.qrserver.com/v1/create-qr-code/?data=";
 		String final_url = url + url_param_data + "&size=" + url_param_size;
 		String destinationFile = "qrCode.jpg";
-		QrCodeGenerator.saveImage(final_url, destinationFile);
+		CommonUtilities.saveImage(final_url, destinationFile);
 		
+		//adding customer model for display
+		model.addAttribute("customer",customer);
 		return "customer-info";
+		
 	}
 }
 
