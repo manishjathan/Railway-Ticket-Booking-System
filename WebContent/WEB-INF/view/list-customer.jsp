@@ -29,6 +29,7 @@
 					<th>PanCard No</th>
 					<th>UID No</th>
 					<th>Wallet Money</th>
+					<th>Customer tickets</th>
 				</tr>
 				
 				<!-- loop over and print our customers -->
@@ -43,7 +44,7 @@
 						<td> ${tempCustomer.panCardNo} </td>
 						<td> ${tempCustomer.uidNo} </td>
 						<td> ${tempCustomer.wallet.amount} </td>
-						
+						<td> ${tempCustomer.tickets}</td>
 					</tr>
 				
 				</c:forEach>
