@@ -14,8 +14,9 @@
 	<br> MobNo : ${customer.mobNo}
 	<br> Wallet MMoney : ${customer.wallet.amount}
 	<br> Tickets : ${customer.tickets}
-	<br>
-	
+	<br><h4>QrCode</h4>
+	<br> <img src="<c:url value='/resources/qrCode.jpg'/>" alt=.../>
+	<br><br>
 	<c:url var="updateLink" value="/customer/getWallet">
 		<c:param name="customerId" value="${customer.id}" />
 	</c:url>

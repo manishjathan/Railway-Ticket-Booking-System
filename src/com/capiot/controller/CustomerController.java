@@ -101,6 +101,7 @@ public class CustomerController {
 	@GetMapping("/generateTicket")
 	public void generateTicket() throws IOException{
 		QrCodeGenerator qrCodeGenerator = new QrCodeGenerator();
+		
 		qrCodeGenerator.saveImage("http://api.qrserver.com/v1/create-qr-code/?data=HelloWorld!&size=200x200","qrCode.jpg");
 	}
 	
@@ -113,12 +114,21 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/bookTicket")
-	public String bookTicket(@ModelAttribute("ticket") Ticket theTicket,Model model){
+	public String bookTicket(@ModelAttribute("ticket") Ticket theTicket,Model model) throws IOException{
 		
 		int id = theTicket.getCustomerId();
 		Customer customer = customerDao.getCustomer(id);
 		customerDao.addTicket(customer,theTicket);
 		model.addAttribute("customer",customer);
+		
+		
+		String url_param_data = String.valueOf(theTicket.getId());
+		String url_param_size = "200x200";
+		String url = "http://api.qrserver.com/v1/create-qr-code/?data=";
+		String final_url = url + url_param_data + "&size=" + url_param_size;
+		String destinationFile = "qrCode.jpg";
+		QrCodeGenerator.saveImage(final_url, destinationFile);
+		
 		return "customer-info";
 	}
 }
