@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
+import com.capiot.dao.FareDetailsDAOImpl;
 import com.capiot.entity.Customer;
+import com.capiot.entity.FareDetails;
 import com.capiot.entity.Ticket;
 
 public class CommonUtilities {
@@ -31,18 +33,13 @@ public class CommonUtilities {
 		String source = ticket.getSource();
 		String dest = ticket.getDestination();
 		String journeyType = ticket.getJourneyType();
-		
-		int fare = CommonUtilities.fetchTicketFare(source, dest, journeyType);
+		FareDetailsDAOImpl fareDetailsDAOImpl = new FareDetailsDAOImpl();
+		FareDetails fareDetails = fareDetailsDAOImpl.fetchFareDetails(source, dest, journeyType);
+		int fare = fareDetails.getFareValue();
 		ticket.setTotalFare(fare);
 		return ticket;
 	}
 	
-	public static int fetchTicketFare(String source, String destination, String journeyType) {
-		//fetch fare from above given parameters
-		
-		//return fare
-		return 0;
-	}
 
 	public static Customer deductWalletMoney(Customer customer, int totalFare) {
 		// TODO Auto-generated method stub

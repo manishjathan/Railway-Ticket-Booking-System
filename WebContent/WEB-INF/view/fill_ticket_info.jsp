@@ -35,11 +35,6 @@
 					</tr>
 					
 					<tr>
-						<td><label>Total Fare:</label></td>
-						<td><form:input path="totalFare" /></td>
-					</tr>
-				
-					<tr>
 						<td><label>Customer Id:</label></td>
 						<td><form:input path="customerId" /></td>
 					</tr>
