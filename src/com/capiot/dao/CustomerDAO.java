@@ -13,6 +13,5 @@ public interface CustomerDAO {
 	public List<Customer> getCustomers();
 	public void addTicket(Customer customer, Ticket ticket);
 	
-
 }
 

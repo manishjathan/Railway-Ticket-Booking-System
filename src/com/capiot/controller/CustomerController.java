@@ -1,7 +1,7 @@
 package com.capiot.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +114,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/bookTicket")
-	public String bookTicket(@ModelAttribute("ticket") Ticket theTicket,Model model) throws IOException{
+	public String bookTicket(@ModelAttribute("ticket") Ticket theTicket,Model model) throws IOException, ClassNotFoundException, SQLException{
 		
 		int id = theTicket.getCustomerId();
 		//Fetching the total Fare and deducting wallet money
