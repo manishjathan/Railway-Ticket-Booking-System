@@ -118,12 +118,19 @@ public class CustomerController {
 		
 		int id = theTicket.getCustomerId();
 		//Fetching the total Fare and deducting wallet money
+		
 		theTicket = CommonUtilities.setTotalFare(theTicket);
 		int totalFare = theTicket.getTotalFare();
 		Customer customer = customerDao.getCustomer(id);
+		int prevWalletMoney = customer.getWallet().getAmount();
 		customer = CommonUtilities.deductWalletMoney(customer,totalFare);
-		customerDao.addTicket(customer,theTicket);
 		
+		if(customer.getWallet().getAmount() == prevWalletMoney) {
+			System.out.println("Not able to book ticket!");
+			return "booking-failure";
+		}
+		else {
+		customerDao.addTicket(customer,theTicket);
 		//Generating qrCode
 		String url_param_data = String.valueOf(theTicket.getId());
 		String url_param_size = "200x200";
@@ -135,7 +142,7 @@ public class CustomerController {
 		//adding customer model for display
 		model.addAttribute("customer",customer);
 		return "ticket-info";
-		
+		}
 	}
 }
 

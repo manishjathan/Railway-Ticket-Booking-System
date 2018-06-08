@@ -65,8 +65,10 @@ public class CommonUtilities {
 	public static Customer deductWalletMoney(Customer customer, int totalFare) {
 		// TODO Auto-generated method stub
 		int walletMoney = customer.getWallet().getAmount();
+		if(totalFare < walletMoney) {
 		int newWalletMoney = walletMoney - totalFare;
 		customer.getWallet().setAmount(newWalletMoney);
+		}
 		return customer;
 	}
 }
