@@ -134,7 +134,7 @@ public class CustomerController {
 		
 		//adding customer model for display
 		model.addAttribute("customer",customer);
-		return "customer-info";
+		return "ticket-info";
 		
 	}
 }
